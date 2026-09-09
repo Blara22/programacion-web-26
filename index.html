@@ -11,29 +11,61 @@
 <body>
   <header>
     <h1><span>:) </span>Bienvenid@ al DASC</h1>
-    <nav>
-      <!-- No usar h1... para enlaces, sólo es ejemplo -->
-      <h1>Enlace 1</h1>
-      <h2>Enlace 2</h2>
-      <h3>Enlace 3</h3>
-      <h4>Enlace 4</h4>
-      <h5>Enlace 5</h5>
-      <h6>Enlace 6</h6>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="https://www.youtube.com" target="_blank" rel="noopener">Youtube</a></li>
+        <li><a href="pages/details.html" target="_blank">Detalles</a></li>
+        <li><a href="#contacto" title="Ver formulario de contacto">Contacto</a></li>
+        <li><a href="tel:+526121234567">Llamar</a></li>
+        <li><a href="mailto:b.lara@uabcs.mx?subject=Información">Envía un correo</a></li>
+        <li><a href="assets/files/HTML.pdf" download>Descarga la presentación</a></li>
+        <li><a href="assets/files/HTML.pdf" download>Descarga la presentación</a></li>
+        <li><a href="pages/multimedia.html">Ejemplos de multimedia</a></li>
+      </ul>
     </nav>
   </header>
 
   <main>
     <aside>
-      Enlace 1
-      Enlace 2
-      Enlace 3
+      <h3>Lista sin ordenar</h3>
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+      <h3>Lista ordenada</h3>
+      <!-- Lista inicia en E -->
+      <ol type="A" start="5">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 3</li>
+        <li>Elemento 3</li>
+        <li>Elemento 3</li>
+        <li>Elemento 3</li>
+
+      </ol>
+      <h3>Lista de términos</h3>
+      <dl>
+        <dt>Término 1
+        <dd>Descripción 1</dd>
+        </dt>
+        <dt>Término 2
+        <dd>Descripción 2</dd>
+        </dt>
+        <dt>Término 3
+        <dd>Descripción 3</dd>
+        </dt>
+      </dl>
     </aside>
     <section>
       <h2>Información de carreras</h2>
       <article>
         <h3>IDS</h3>
-        <p>Lorem ipsum <strong>dolor</strong> sit amet <small>consectetur adipisicing</small> elit. <br> Ex dolorem alias eum ipsum? Vitae quod officia
-          dignissimos <b>harum</b> neque <i>veniam</i>, tempora <u>quo debitis</u> eum illo excepturi? Distinctio, ipsa perspiciatis! Quam!
+        <p>Lorem ipsum <strong>dolor</strong> sit amet <small>consectetur adipisicing</small> elit. <br> Ex dolorem
+          alias eum ipsum? Vitae quod officia
+          dignissimos <b>harum</b> neque <i>veniam</i>, tempora <u>quo debitis</u> eum illo excepturi? Distinctio, ipsa
+          perspiciatis! Quam!
         </p>
         <pre>
           <code>
@@ -42,6 +74,44 @@ for(int i = 0; i < 10; i++) {
 }
           </code>
         </pre>
+      </article>
+    </section>
+    <section>
+      <h2>Convocatoria</h2>
+      <article>
+        <h3>IDS</h3>
+        <p>Lorem ipsum <strong>dolor</strong> sit amet <small>consectetur adipisicing</small> elit. <br> Ex dolorem
+          alias
+          eum ipsum? Vitae quod officia
+          dignissimos <b>harum</b> neque <i>veniam</i>, tempora <u>quo debitis</u> eum illo excepturi? Distinctio, ipsa
+          perspiciatis! Quam!
+        </p>
+        <pre>
+              <code>
+    for(int i = 0; i < 10; i++) {
+      cout << i;
+    }
+              </code>
+            </pre>
+      </article>
+    </section>
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <article>
+        <h3>IDS</h3>
+        <p>Lorem ipsum <strong>dolor</strong> sit amet <small>consectetur adipisicing</small> elit. <br> Ex dolorem
+          alias
+          eum ipsum? Vitae quod officia
+          dignissimos <b>harum</b> neque <i>veniam</i>, tempora <u>quo debitis</u> eum illo excepturi? Distinctio, ipsa
+          perspiciatis! Quam!
+        </p>
+        <pre>
+              <code>
+    for(int i = 0; i < 10; i++) {
+      cout << i;
+    }
+              </code>
+            </pre>
       </article>
     </section>
     <hr>
