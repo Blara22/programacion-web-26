@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo de formulario HTML</title>
+</head>
+
+<body>
+  <h1>Ejemplo de formulario HTML</h1>
+  <form action="/procesar-formulario" method="GET" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Información de usuario</legend>
+      <div>
+        <label for="inp-usuario">Nombre de usuario: </label>
+        <input required name="nombre_usuario" type="text" id="inp-usuario" disabled 
+          placeholder="Ingresa tu nombre de usuario" aria-describedby="desc-usuario"
+          value="Blara">
+        <small id="desc-usuario">El nombre de usuario debe ser único.</small>
+      </div>
+      <div>
+        <label for="password">Contraseña</label>
+        <input type="password" name="contrasena" placeholder="Ingresa tu contraseña" id="password">
+      </div>
+      <div>
+        <label for="inp-email">Correo electrónico</label>
+        <input required type="email" name="email" value="b.lara@uabcs.mx" readonly placeholder="Ingresa tu correo" id="password">
+      </div>
+
+      <div>
+        <label>Suscripción elegida: </label>
+        <label for="rad-gratis">Gratuita</label>
+        <input type="radio" id="rad-gratis" name="plan" value="gratuito" checked>
+        <label for="rad-pro">Profesional</label>
+        <input type="radio" id="rad-pro" name="plan" value="pro">
+      </div>
+
+      <div>
+        <input type="checkbox" id="chk-terminos" value="aceptado">
+        <label for="chk-terminos">Acepto los términos del servicio</label>
+      </div>
+    </fieldset>
+    <div>
+      <label for="inp-tel">Teléfono (10 dígitos)</label>
+      <input type="tel" id="inp-tel" name="telefono" placeholder="6120000000" pattern="[0-9]{10}"></input>
+    </div>
+
+    <div>
+      <label for="inp-edad">Edad (18 a 99 años)</label>
+      <input type="number" name="edad" id="inp-edad" min="18" max="99" step="2">
+    </div>
+
+    <div>
+      <label for="inp-fecha">Fecha de registro</label>
+      <input type="date" name="fecha_registro" id="inp-fecha" min="2026-01-01" max="2026-12-31">
+    </div>
+
+    <div>
+      <label for="txt-comentarios">Comentarios adicionales</label><br>
+      <textarea id="txt-comentarios" name="comentarios" rols="5" cols="60" placeholder="Ingresa un comentario...">
+      </textarea>
+    </div>
+
+    <div>
+      <label for="sel-estado"> Estado civil: </label>
+      <select id="sel-estado" name="estado_civil">
+        <option value="soltero">Soltero(a)</option>
+        <option value="casado" selected>Casado(a)</option>
+        <option value="otro">Otro</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="inp-ciudad">Ciudad de origen</label>
+      <input type="text" id="inp-ciudad" name="ciudad" list="lista-ciudades" placeholder="Selecciona o escribe...">
+
+      <datalist id="lista-ciudades">
+        <option value="La Paz">
+        <option value="Los Cabos">
+        <option value="Loreto">
+        <option value="Comondú">
+      </datalist>
+    </div>
+
+
+    <div>
+      <button type="submit">Enviar datos</button>
+      <button type="reset">Restablecer</button>
+      <button type="button">Ayuda</button>
+    </div>
+  </form>
+  <br>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>
