@@ -5,12 +5,37 @@
   <title>Mi primera página</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/icons/logouabcs.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    ul {
+      color: green;
+    }
 
+    h1 {
+      color: red;
+    }
+
+    .azul-negrita {
+      color: blue;
+      font-weight: bold;
+    }
+
+    .texto-grande {
+      font-size: 60px;
+    }
+
+    #color-morado {
+      color: purple;
+      font-size: 50px;
+      text-align: right;
+    }
+  </style>
 </head>
 
 <body>
   <header>
-    <h1><span>:) </span>Bienvenid@ al DASC</h1>
+    <h1 id="color-morado" style="color: blue;"><span>:) </span>Bienvenid@ al DASC</h1>
     <nav aria-label="Navegación principal">
       <ul>
         <li><a href="https://www.youtube.com" target="_blank" rel="noopener">Youtube</a></li>
@@ -27,13 +52,13 @@
 
   <main>
     <aside>
-      <h3>Lista sin ordenar</h3>
+      <h2 class="azul-negrita">Lista sin ordenar</h3>
       <ul>
-        <li>Elemento 1</li>
+        <li class="azul-negrita texto-grande">Elemento 1</li>
         <li>Elemento 2</li>
         <li>Elemento 3</li>
       </ul>
-      <h3>Lista ordenada</h3>
+      <h2 class="azul-negrita">Lista ordenada</h3>
       <!-- Lista inicia en E -->
       <ol type="A" start="5">
         <li>Elemento 1</li>
@@ -45,7 +70,7 @@
         <li>Elemento 3</li>
 
       </ol>
-      <h3>Lista de términos</h3>
+      <h2 class="azul-negrita">Lista de términos</h2>
       <dl>
         <dt>Término 1
         <dd>Descripción 1</dd>
