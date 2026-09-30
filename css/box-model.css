@@ -1,0 +1,140 @@
+:root {
+  --color-primario: cornflowerblue;
+  --color-fondo: #1e1e2c;
+  --fondo-card: #2a2a3c;
+  --color-borde: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  background-color: var(--color-fondo);
+  color: white;
+
+  text-align: center;
+
+  font-family: 'PT Sans', sans-serif;
+}
+
+h1 {
+  font-size: 4vw;
+  font-weight: bold;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: var(--color-primario);
+}
+
+h2 {
+  margin: 0 0 16px;
+
+  font-size: 1.75rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.destacado {
+  font-weight: bold;
+  color: var(--color-primario);
+}
+
+.etiqueta {
+  font-size: 80%;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  color: gold;
+}
+
+.nota {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hero {
+  min-height: 160px;
+  padding: 64px 24px;
+  background-color: var(--color-fondo);
+  background-image: url("../assets/img/paisaje-1200.png");
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.hero-titulo {
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.hero-texto {
+  margin: 8px 0;
+  font-size: 1.25rem;
+  text-shadow: 0 1px 4px rgba(0,0,0, 0.8);
+}
+
+.contenido {
+  padding: 50px 24px;
+
+}
+
+.aviso {
+  margin-bottom: 40px;
+  padding: 16px 20px;
+  background-color: var(--fondo-card);
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+}
+
+.card {
+  display: inline-block;
+  width: 650px;
+  max-width: 100%;
+  margin: 12px;
+  padding: 16px;
+  background-color: var(--fondo-card);
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  text-align: left;
+}
+
+.card-imagen {
+  display: block;
+  width: 100%;
+  height: 140px;
+  margin-bottom: 12px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.card-titulo {
+  margin: 4px 0;
+  font-size: 1.25rem;
+}
+
+.boton {
+  display: block;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background-color: var(--color-primario);
+  color: var(--color-fondo);
+
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+
+  border: 1px solid var(--color-primario);
+  border-radius: 2px;
+}
