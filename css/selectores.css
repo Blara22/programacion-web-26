@@ -3,6 +3,8 @@
   --color-fondo: #1e1e2c;
   --fondo-card: #2a2a3c;
   --color-borde: rgba(255, 255, 255, 0.1);
+  --color-alerta: #e07a88;
+  --alto-menu: 64px;
 }
 
 * {
@@ -68,6 +70,10 @@ p {
 
 /* ===== Bloque: menu ===== */
 .menu {
+  position: sticky;
+  z-index: 40;
+  top: 0;
+  height: var(--alto-menu);
   padding: 12px 24px;
   background-color: var(--fondo-card);
   border-bottom: 1px solid var(--color-borde);
@@ -174,6 +180,7 @@ p {
 
 /* ===== Bloque: card ===== */
 .card {
+  position: relative;
   display: inline-block;
   width: 650px;
   max-width: 100%;
@@ -334,4 +341,121 @@ p {
 /* :checked + hermano adyacente */
 .formulario__marca:checked + .formulario__texto {
   color: gold;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px; 
+  padding: 4px 12px;
+  background-color: gold;
+  color: var(--color-fondo);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.badge--popular {
+  background-color: var(--color-alerta);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.overlay__texto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.subir {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 30;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primario);
+  color: var(--color-fondo);
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 48px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s;
+}
+
+.subir:hover {
+  transform: translateY(-4px);
+}
+
+.subir:focus-visible {
+  outline: 3px solid gold;
+  outline-offset: 3px;
+}
+
+.temas h2 {
+  position: sticky;
+  z-index: 20;
+  top: var(--alto-menu);
+  margin: 0;
+  padding: 12px 0;
+  background-color: var(--color-fondo);
+}
+
+.menu__item {
+  position: relative;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  text-align: left;
+  background-color: var(--fondo-card);
+  border: 1px solid var(--color-borde);
+  border-radius: 2px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+}
+
+.menu__item:hover .submenu,
+.menu__item:focus-within .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.submenu__enlace {
+  display: block;
+  padding: 8px 16px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.submenu__enlace:hover {
+  color: var(--color-primario);
+  background-color: rgba(100, 149, 237, 0.12);
+}
+
+.submenu__enlace:focus-visible {
+  outline: 2px solid gold;
+  outline-offset: -2px;
 }
