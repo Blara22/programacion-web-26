@@ -16,7 +16,8 @@
 </head>
 
 <body>
-    <nav class="menu" aria-label="Principal">
+  <nav class="menu" aria-label="Principal">
+    <a class="menu__marca" href="#inicio">WebCurso</a>
     <ul class="menu__lista">
       <li><a class="menu__enlace " href="#inicio" aria-current="page">Inicio</a></li>
       <li class="menu__item">
@@ -32,93 +33,113 @@
     </ul>
   </nav>
 
-  <header class="hero" id="inicio">
-    <h1 class="hero__titulo">Curso de Programación Web</h1>
-    <p class="hero__texto">Aprende a crear sitios desde cero</p>
-  </header>
+  <div class="layout">
+    <header class="hero" id="inicio">
+      <h1 class="hero__titulo">Curso de Programación Web</h1>
+      <p class="hero__texto">Aprende a crear sitios desde cero</p>
+    </header>
 
-  <main class="contenido">
-
-    <aside class="aviso">
-      <span class="etiqueta">Nuevo</span>
-      <span class="destacado">Inscripciones abiertas</span>
-      para el próximo grupo
+    <aside class="opciones" aria-label="Opciones">
+      <h2 class="opciones__titulo">Opciones</h2>
+      <ul class="opciones__lista">
+        <li><a class="opciones__enlace" href="#temas">Temas</a></li>
+        <li><a class="opciones__enlace" href="#inscripcion">Inscripción</a></li>
+        <li><a class="opciones__enlace" href="#inicio">Volver al inicio</a></li>
+      </ul>
     </aside>
 
-    <p class="intro">
-      Este curso recorre las cuatro tecnologías base de la web. Cada módulo
-      termina con un proyecto pequeño que se suma al sitio final.
-    </p>
+    <main class="contenido">
 
-    <section class="temas" id="temas">
-      <h2>Temas del curso</h2>
+      <aside class="aviso">
+        <span class="etiqueta">Nuevo</span>
+        <span class="destacado">Inscripciones abiertas</span>
+        para el próximo grupo
+      </aside>
 
-      <article class="card">
-        <span class="badge">Nuevo</span>
+      <p class="intro">
+        Este curso recorre las cuatro tecnologías base de la web: HTML, CSS,
+        JavaScript y
+        <span class="tooltip" tabindex="0" aria-describedby="tip-pwa">PWA
+          <span class="tooltip__texto" role="tooltip" id="tip-pwa">Progressive Web App:
+            un sitio que se puede instalar como si fuera una app</span></span>.
+        Cada módulo termina con un proyecto pequeño que se suma al sitio final.
+      </p>
 
-        <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=HTML"
-          alt="Ilustración que representa HTML">
-        <span class="etiqueta">Módulo 1</span>
-        <h3 class="card__titulo">HTML</h3>
-        <p class="nota">Estructura de una página web</p>
-        <a class="boton" href="html.html">Ver tema</a>
-        <div class="overlay">
-          <span class="overlay__texto">Centrado</span>
+      <section class="temas" id="temas">
+        <h2>Temas del curso</h2>
+
+        <div class="temas__lista">
+          <article class="card">
+            <span class="badge">Nuevo</span>
+            <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=HTML"
+              alt="Ilustración que representa HTML">
+            <span class="etiqueta">Módulo 1</span>
+            <h3 class="card__titulo">HTML</h3>
+            <p class="nota">Estructura de una página web</p>
+            <a class="boton" href="html.html">Ver tema</a>
+            <div class="overlay">
+              <span class="overlay__texto">Centrado</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=CSS"
+              alt="Ilustración que representa CSS">
+            <span class="etiqueta">Módulo 2</span>
+            <h3 class="card__titulo">CSS</h3>
+            <p class="nota">Estilos, colores y diseño</p>
+            <a class="boton" href="css.html">Ver tema</a>
+          </article>
+
+          <article class="card">
+            <span class="badge badge--popular">Popular</span>
+            <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=JavaScript"
+              alt="Ilustración que representa JavaScript">
+            <span class="etiqueta">Módulo 3</span>
+            <h3 class="card__titulo">JavaScript</h3>
+            <p class="nota">Interacción y lógica del sitio</p>
+            <a class="boton" href="javascript.html">Ver tema</a>
+          </article>
+
+          <article class="card">
+            <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=PWA"
+              alt="Ilustración que representa una PWA">
+            <span class="etiqueta">Módulo 4</span>
+            <h3 class="card__titulo">PWA</h3>
+            <p class="nota">Aplicaciones web instalables</p>
+            <a class="boton" href="pwa.html">Ver tema</a>
+          </article>
         </div>
-      </article>
+      </section>
 
-      <article class="card">
-        <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=CSS"
-          alt="Ilustración que representa CSS">
-        <span class="etiqueta">Módulo 2</span>
-        <h3 class="card__titulo">CSS</h3>
-        <p class="nota">Estilos, colores y diseño</p>
-        <a class="boton" href="css.html">Ver tema</a>
-      </article>
+      <section class="inscripcion" id="inscripcion">
+        <h2>Inscripción</h2>
+        <form class="formulario" action="#">
+          <label class="formulario__campo">Nombre
+            <input class="formulario__input" type="text" required>
+          </label>
+          <label class="formulario__campo">Correo
+            <input class="formulario__input" type="email" required>
+          </label>
+          <label class="formulario__campo">Grupo
+            <input class="formulario__input" type="text" value="Grupo 2 (lleno)" disabled>
+          </label>
+          <label class="formulario__check">
+            <input class="formulario__marca" type="checkbox">
+            <span class="formulario__texto">Acepto el aviso de privacidad</span>
+          </label>
+          <button class="boton" type="submit">Inscribirme</button>
+          <button class="boton boton--secundario" type="reset">Limpiar</button>
+          <button class="boton" type="button" disabled>Descargar temario (pronto)</button>
+        </form>
+      </section>
 
-      <article class="card">
-        <span class="badge badge--popular">Popular</span>
-        <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=JavaScript"
-          alt="Ilustración que representa JavaScript">
-        <span class="etiqueta">Módulo 3</span>
-        <h3 class="card__titulo">JavaScript</h3>
-        <p class="nota">Interacción y lógica del sitio</p>
-        <a class="boton" href="javascript.html">Ver tema</a>
-      </article>
-
-      <article class="card">
-        <img class="card__imagen" src="https://placehold.co/480x280/ffffff/6495ed.png?text=PWA"
-          alt="Ilustración que representa una PWA">
-        <span class="etiqueta">Módulo 4</span>
-        <h3 class="card__titulo">PWA</h3>
-        <p class="nota">Aplicaciones web instalables</p>
-        <a class="boton" href="pwa.html">Ver tema</a>
-      </article>
-    </section>
-
-    <section class="inscripcion" id="inscripcion">
-      <h2>Inscripción</h2>
-      <form class="formulario" action="#">
-        <label class="formulario__campo">Nombre
-          <input class="formulario__input" type="text" required>
-        </label>
-        <label class="formulario__campo">Correo
-          <input class="formulario__input" type="email" required>
-        </label>
-        <label class="formulario__campo">Grupo
-          <input class="formulario__input" type="text" value="Grupo 2 (lleno)" disabled>
-        </label>
-        <label class="formulario__check">
-          <input class="formulario__marca" type="checkbox">
-          <span class="formulario__texto">Acepto el aviso de privacidad</span>
-        </label>
-        <button class="boton" type="submit">Inscribirme</button>
-        <button class="boton boton--secundario" type="reset">Limpiar</button>
-        <button class="boton" type="button" disabled>Descargar temario (pronto)</button>
-      </form>
-    </section>
-
-  </main>
+    </main>
+    <footer class="pie">
+      <p class="nota">© 2026 Curso de Programación Web</p>
+      <a class="pie__enlace" href="#inscripcion">Inscríbete</a>
+    </footer>
+  </div>
   <a class="subir" href="#inicio" aria-label="Volver arriba">↑</a>
 </body>
 

@@ -70,6 +70,9 @@ p {
 
 /* ===== Bloque: menu ===== */
 .menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   z-index: 40;
   top: 0;
@@ -77,6 +80,14 @@ p {
   padding: 12px 24px;
   background-color: var(--fondo-card);
   border-bottom: 1px solid var(--color-borde);
+}
+
+.menu__marca {
+  color: var(--color-primario);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
 }
 
 .menu__lista {
@@ -181,11 +192,9 @@ p {
 /* ===== Bloque: card ===== */
 .card {
   position: relative;
-  display: inline-block;
-  width: 650px;
-  max-width: 100%;
-  margin: 12px;
-  padding: 16px;
+  flex: 0 0 280px;
+  max-width: 460px
+;  padding: 16px;
   background-color: var(--fondo-card);
   border: 1px solid var(--color-borde);
   border-radius: 4px;
@@ -458,4 +467,132 @@ p {
 .submenu__enlace:focus-visible {
   outline: 2px solid gold;
   outline-offset: -2px;
+}
+
+.tooltip {
+  position: relative;
+  color: gold;
+  font-weight: bold;
+  border-bottom: 1px dotted gold;
+  cursor: help;
+}
+
+.tooltip__texto {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 220px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background-color: var(--fondo-card);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.4;
+  text-align: center;
+  border: 1px solid var(--color-primario);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* flechita: un absolute dentro de otro absolute */
+.tooltip__texto::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-top-color: var(--color-primario);
+}
+
+.tooltip:hover .tooltip__texto,
+.tooltip:focus .tooltip__texto {
+  opacity: 1;
+  visibility: visible;
+}
+.temas__lista {
+  display: flex;
+  justify-content: center;
+  /*flex-direction: row;*/
+  /*flex-wrap: wrap;*/
+  align-items: center;
+  flex-flow: row wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-areas:
+    "header  header"
+    "sidebar main"
+    "footer  footer";
+  gap: 0 24px;
+}
+
+.hero      { grid-area: header; }
+.opciones  { grid-area: sidebar; }
+.contenido { grid-area: main; }
+.pie       { grid-area: footer; }
+
+.opciones {
+  position: sticky;
+  top: calc(var(--alto-menu) + 16px);
+  align-self: start;        /* sin esto el sticky no funciona en grid */
+  margin: 50px 0 0 24px;
+  padding: 16px;
+  background-color: var(--fondo-card);
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+  text-align: left;
+}
+
+.opciones__titulo {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  color: var(--color-primario);
+}
+
+.opciones__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.opciones__enlace {
+  display: block;
+  padding: 8px 12px;
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.opciones__enlace:hover {
+  color: var(--color-primario);
+  background-color: rgba(100, 149, 237, 0.12);
+}
+
+.pie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-top: 1px solid var(--color-borde);
+}
+
+.pie p { margin: 0; }
+
+.pie__enlace {
+  color: var(--color-primario);
+  font-weight: bold;
 }
