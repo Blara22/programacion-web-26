@@ -1,0 +1,229 @@
+:root {
+  /* Colores */
+  --color-fondo: #f6f1ea;
+  --color-superficie: #ffffff;
+  --color-texto: #2b2118;
+  --color-texto-suave: #7a5c45;
+  --color-texto-tenue: #999999;
+  --color-primario: #4b2e1e;
+  --color-primario-texto: #ffffff;
+  --color-borde: #eadfd2;
+  --color-linea: #eeeeee;
+  --color-favorito: #d9534f;
+  --color-favorito-fondo: #fff4f3;
+  --color-error: #c0392b;
+  --color-boton-suave: #eadfd2;
+  --color-boton-neutro: #eeeeee;
+  --color-boton-neutro-texto: #555555;
+  --color-log-fondo: #2b2118;
+  --color-log-texto: #ffea7d;
+
+  /* Espaciado */
+  --espacio-xs: 6px;
+  --espacio-s: 8px;
+  --espacio-m: 12px;
+  --espacio-l: 16px;
+  --espacio-xl: 24px;
+
+  /* Forma */
+  --radio-s: 6px;
+  --radio-m: 10px;
+  --radio-l: 12px;
+  --sombra: 0 1px 4px #0002;
+
+  /* Tipografía */
+  --fuente: system-ui, sans-serif;
+  --fuente-mono: monospace;
+  --texto-s: 0.85rem;
+  --texto-m: 1rem;
+  --texto-l: 1.1rem;
+  --texto-xl: 1.4rem;
+  --texto-emoji: 2.2rem;
+
+  /* Layout */
+  --ancho-maximo: 1000px;
+  --ancho-tarjeta: 150px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente);
+  margin: 0;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+header {
+  background: var(--color-primario);
+  color: var(--color-primario-texto);
+  padding: var(--espacio-l) var(--espacio-xl);
+}
+
+header h1 {
+  margin: 0;
+  font-size: var(--texto-xl);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--espacio-xl);
+  padding: var(--espacio-xl);
+  max-width: var(--ancho-maximo);
+  margin: auto;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: var(--texto-l);
+}
+
+section {
+  background: var(--color-superficie);
+  border-radius: var(--radio-l);
+  padding: var(--espacio-l);
+  box-shadow: var(--sombra);
+}
+
+/* ============================================================
+   Menú (tarjetas)
+   ============================================================ */
+#catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--ancho-tarjeta), 1fr));
+  gap: var(--espacio-m);
+}
+
+.tarjeta {
+  border: 2px solid var(--color-borde);
+  border-radius: var(--radio-m);
+  padding: var(--espacio-m);
+  text-align: center;
+}
+
+.tarjeta.favorita {
+  /* se activa con classList */
+  border-color: var(--color-favorito);
+  background: var(--color-favorito-fondo);
+}
+
+.tarjeta h3 {
+  margin: var(--espacio-xs) 0 2px;
+  font-size: var(--texto-m);
+}
+
+.emoji {
+  font-size: var(--texto-emoji);
+}
+
+.precio {
+  margin: 0 0 var(--espacio-s);
+  color: var(--color-texto-suave);
+}
+
+/* ============================================================
+   Botones
+   ============================================================ */
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: var(--radio-s);
+  padding: var(--espacio-xs) 10px;
+  background: var(--color-primario);
+  color: var(--color-primario-texto);
+}
+
+button.fav {
+  background: var(--color-boton-neutro);
+  color: var(--color-boton-neutro-texto);
+}
+
+button.fav.activo {
+  background: var(--color-favorito);
+  color: var(--color-primario-texto);
+}
+
+button.mini {
+  padding: 2px var(--espacio-s);
+  background: var(--color-boton-suave);
+  color: var(--color-texto);
+}
+
+/* ============================================================
+   Pedido
+   ============================================================ */
+#carrito {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--espacio-m);
+}
+
+#carrito li {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  padding: var(--espacio-xs) 0;
+  border-bottom: 1px solid var(--color-linea);
+}
+
+#carrito .nombre {
+  flex: 1;
+}
+
+.vacio {
+  color: var(--color-texto-tenue);
+}
+
+.oculto {
+  display: none;
+}
+
+.total {
+  font-weight: bold;
+  font-size: var(--texto-l);
+}
+
+form {
+  display: grid;
+  gap: var(--espacio-s);
+  margin-top: var(--espacio-l);
+}
+
+input {
+  padding: var(--espacio-xs);
+  border: 1px solid #cccccc;
+  border-radius: var(--radio-s);
+}
+
+.error {
+  color: var(--color-error);
+}
+
+#log {
+  font-family: var(--fuente-mono);
+  font-size: var(--texto-s);
+  background: var(--color-log-fondo);
+  color: var(--color-log-texto);
+  padding: var(--espacio-s);
+  border-radius: var(--radio-s);
+  margin-top: var(--espacio-m);
+}
+
+
+@media (max-width: 700px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================================================
+   Clase 4: formularios con errores en el DOM
+   ============================================================ */
+.campo { display: grid; gap: 2px; }
+.campo label { font-size: var(--texto-s); color: var(--color-texto-suave); }
+.error-campo, .mensaje.error { color: var(--color-error); font-size: var(--texto-s); min-height: 1em; margin: 0; }
+.mensaje { margin: 0; font-size: var(--texto-s); color: var(--color-texto-suave); }
+input.invalido, select.invalido { border-color: var(--color-error); background: var(--color-favorito-fondo); }
+select { padding: var(--espacio-xs); border: 1px solid #cccccc; border-radius: var(--radio-s); }
