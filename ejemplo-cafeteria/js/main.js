@@ -1,5 +1,5 @@
 // PUNTO DE ENTRADA: guarda el estado y conecta eventos con lógica y vista.
-import productosIniciales from "./data.js";
+import { obtenerProductos } from "./api.js";
 import { esNombreValido, existeProducto, validarPedido } from "./validators.js";
 import {
   renderCatalogo, renderCarrito, mostrarErrores, mostrarErroresNativos,
@@ -12,7 +12,7 @@ const formProducto = document.querySelector("#form-producto");
 const formPedido = document.querySelector("#form-pedido");
 
 // ---------- ESTADO (un import no se puede reasignar, por eso vive aquí) ----------
-let productos = [...productosIniciales];
+let productos = [];
 let carrito = [];   // [{ id, cantidad }]
 
 // ---------- LÓGICA sin mutar: devuelve arreglos nuevos ----------
@@ -120,5 +120,18 @@ formPedido.addEventListener("submit", (e) => {
 // ---------- Burbujeo (de la clase pasada) ----------
 document.addEventListener("click", mostrarLog);
 
-pintarCatalogo();
-pintarCarrito();
+async function iniciarAplicacion() {
+  try {
+    productos = await obtenerProductos();
+
+    pintarCatalogo();
+    pintarCarrito();
+
+  } catch (error) {
+    console.error(error);
+    catalogo.textContent =
+      "No fue posible cargar el menú. Intenta nuevamente.";
+  }
+}
+
+iniciarAplicacion();
