@@ -1,3 +1,4 @@
+import Swal from "../../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 // VISTA: único módulo que pinta en pantalla. No toma decisiones de negocio.
 const catalogo = document.querySelector("#catalogo");
 const listaCarrito = document.querySelector("#carrito");
@@ -115,4 +116,14 @@ export function mostrarLog(evento) {
   log.textContent =
     `target: <${evento.target.tagName.toLowerCase()}> · ` +
     `currentTarget: ${evento.currentTarget === document ? "document" : "?"} · acción: ${accion}`;
+}
+
+// ---------- Alertas (SweetAlert2) ----------
+export function alertaPedido(nombre, total) {
+  console.log('Alerta');
+  return Swal.fire({
+    icon: "warning",
+    title: "¡Pedido confirmado!",
+    text: `Gracias, ${nombre}. Total: $${total.toFixed(2)}`,
+  });
 }

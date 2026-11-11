@@ -1,6 +1,6 @@
 // PUNTO DE ENTRADA: estado, eventos y coordinación entre API, storage y vista.
 import { obtenerProductos } from "./api.js";
-import { guardar, leer, eliminar } from "./storage.js";
+import { guardar, leer } from "./storage.js";
 import { esNombreValido, existeProducto, validarPedido } from "./validators.js";
 import {
   renderCatalogo,
@@ -12,6 +12,7 @@ import {
   mostrarMensaje,
   mostrarLog,
   mostrarEstadoCatalogo,
+  alertaPedido
 } from "./ui.js";
 
 const catalogo = document.querySelector("#catalogo");
@@ -115,6 +116,7 @@ function debounce(fn, ms) {
 const buscarConPausa = debounce((valor) => {
   terminoBusqueda = valor;
   pintarCatalogo();
+  console.log("Búsqueda");
 }, 400);
 
 inputBuscar.addEventListener("input", (evento) => {
@@ -210,10 +212,8 @@ formPedido.addEventListener("submit", (evento) => {
   persistirCarrito();
   pintarCarrito();
   formPedido.reset();
-  mostrarMensaje(
-    formPedido,
-    `Gracias, ${datos.nombre.trim()}. Pedido de $${total.toFixed(2)} confirmado a ${datos.email}.`,
-  );
+  alertaPedido(datos.nombre.trim(), total);
+
   formPedido.querySelector("button[type='submit']").focus();
 });
 
