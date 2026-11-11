@@ -1,0 +1,8 @@
+[
+  { "id": 1, "nombre": "Café americano", "precio": 35, "emoji": "☕" },
+  { "id": 2, "nombre": "Capuchino", "precio": 50, "emoji": "🥛" },
+  { "id": 3, "nombre": "Croissant", "precio": 40, "emoji": "🥐" },
+  { "id": 4, "nombre": "Pastel de chocolate", "precio": 65, "emoji": "🍰" },
+  { "id": 5, "nombre": "Té chai", "precio": 42, "emoji": "🫖" },
+  { "id": 6, "nombre": "Galleta de avena", "precio": 25, "emoji": "🍪" }
+]

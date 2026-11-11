@@ -1,97 +1,115 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es" data-tema="claro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4b2e1e" />
+    <title>Cafetería · Persistencia y caché</title>
+    <link rel="stylesheet" href="estilos.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="encabezado">
+        <h1>☕ Cafetería</h1>
+        <button id="btn-tema" type="button" aria-pressed="false" aria-label="Cambiar tema de color">
+          🌙 Modo oscuro
+        </button>
+      </div>
+    </header>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cafetería · Ejemplo DOM II</title>
-  <link rel="stylesheet" href="estilos.css">
-  <!-- Los módulos son diferidos: pueden ir en el head sin defer -->
-  <script type="module" src="js/main.js"></script>
-</head>
-
-<body>
-  <header>
-    <h1>☕ Cafetería · Ejemplo DOM II</h1>
-  </header>
-
-  <main>
-    <section>
-      <h2>Menú</h2>
-      <div id="catalogo"></div>
-
-      <!-- novalidate: los mensajes de error los mostramos nosotros -->
-      <form id="form-producto" novalidate>
-        <h2>Agregar un producto al menú</h2>
-        <div class="campo">
-          <label for="p-nombre">Nombre</label>
-          <input id="p-nombre" name="nombre" required minlength="3" maxlength="30" placeholder="Ej. Té chai">
-          <span class="error-campo" data-error-para="nombre"></span>
+    <main>
+      <section aria-labelledby="titulo-menu">
+        <h2 id="titulo-menu">Menú</h2>
+        <div class="buscador campo">
+          <label for="buscar-productos">Buscar productos</label>
+          <input
+            id="buscar-productos"
+            name="busqueda"
+            type="search"
+            placeholder="Ej. café, pastel..."
+            autocomplete="off"
+            aria-describedby="ayuda-busqueda estado-catalogo"
+          />
+          <small id="ayuda-busqueda">La búsqueda se realiza después de una pausa al escribir.</small>
         </div>
-        <div class="campo">
-          <label for="p-precio">Precio</label>
-          <input id="p-precio" name="precio" type="number" required min="1" max="500" step="any" placeholder="Ej. 45">
-          <span class="error-campo" data-error-para="precio"></span>
+        <p id="estado-catalogo" class="estado" role="status" aria-live="polite" aria-atomic="true">
+          Cargando menú...
+        </p>
+        <div id="catalogo" aria-label="Productos disponibles"></div>
+
+        <form id="form-producto" novalidate>
+          <h2>Agregar un producto al menú</h2>
+          <div class="campo">
+            <label for="p-nombre">Nombre</label>
+            <input id="p-nombre" name="nombre" required minlength="3" maxlength="30" placeholder="Ej. Té chai" aria-describedby="error-producto-nombre" />
+            <span id="error-producto-nombre" class="error-campo" data-error-para="nombre"></span>
+          </div>
+          <div class="campo">
+            <label for="p-precio">Precio</label>
+            <input id="p-precio" name="precio" type="number" required min="1" max="500" step="any" placeholder="Ej. 45" aria-describedby="error-producto-precio" />
+            <span id="error-producto-precio" class="error-campo" data-error-para="precio"></span>
+          </div>
+          <div class="campo">
+            <label for="p-emoji">Ícono</label>
+            <select id="p-emoji" name="emoji">
+              <option>🆕</option><option>☕</option><option>🥛</option><option>🥐</option><option>🍰</option><option>🫖</option><option>🍪</option>
+            </select>
+          </div>
+          <button type="submit">Agregar al menú</button>
+          <p class="mensaje" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section aria-labelledby="titulo-pedido">
+        <h2 id="titulo-pedido">Tu pedido</h2>
+        <p id="vacio" class="vacio">Aún no agregas nada.</p>
+        <ul id="carrito" aria-label="Productos del carrito"></ul>
+        <p class="total">Total: $<span id="total">0.00</span></p>
+
+        <form id="form-pedido" novalidate>
+          <h2>Confirmar pedido</h2>
+          <div class="campo">
+            <label for="c-nombre">Tu nombre</label>
+            <input id="c-nombre" name="nombre" required minlength="3" autocomplete="name" aria-describedby="error-pedido-nombre" />
+            <span id="error-pedido-nombre" class="error-campo" data-error-para="nombre"></span>
+          </div>
+          <div class="campo">
+            <label for="c-email">Correo</label>
+            <input id="c-email" name="email" type="email" required autocomplete="email" aria-describedby="error-pedido-email" />
+            <span id="error-pedido-email" class="error-campo" data-error-para="email"></span>
+          </div>
+          <span class="error-campo" data-error-para="carrito" role="alert"></span>
+          <button type="submit">Confirmar pedido</button>
+          <p class="mensaje" role="status" aria-live="polite"></p>
+        </form>
+        <p id="log" aria-label="Registro de eventos">Haz clic en cualquier lugar…</p>
+      </section>
+    </main>
+
+    <p id="estado-app" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <template id="tpl-tarjeta">
+      <article class="tarjeta">
+        <div class="emoji" aria-hidden="true"></div>
+        <h3></h3>
+        <p class="precio"></p>
+        <div class="acciones-tarjeta">
+          <button type="button" data-accion="agregar">Agregar</button>
+          <button type="button" class="fav" data-accion="favorito" aria-pressed="false">♡</button>
         </div>
-        <div class="campo">
-          <label for="p-emoji">Ícono</label>
-          <select id="p-emoji" name="emoji">
-            <option>🆕</option><option>☕</option><option>🥛</option><option>🥐</option><option>🍰</option>
-          </select>
-        </div>
-        <button type="submit">Agregar al menú</button>
-        <p class="mensaje"></p>
-      </form>
-    </section>
+      </article>
+    </template>
 
-    <section>
-      <h2>Tu pedido</h2>
-      <p id="vacio" class="vacio">Aún no agregas nada.</p>
-      <ul id="carrito"></ul>
-      <p class="total">Total: $<span id="total">0.00</span></p>
-
-      <form id="form-pedido" novalidate>
-        <h2>Confirmar pedido</h2>
-        <div class="campo">
-          <label for="c-nombre">Tu nombre</label>
-          <input id="c-nombre" name="nombre">
-          <span class="error-campo" data-error-para="nombre"></span>
-        </div>
-        <div class="campo">
-          <label for="c-email">Correo</label>
-          <input id="c-email" name="email" type="email">
-          <span class="error-campo" data-error-para="email"></span>
-        </div>
-        <span class="error-campo" data-error-para="carrito"></span>
-        <button type="submit">Confirmar pedido</button>
-        <p class="mensaje"></p>
-      </form>
-
-      <div id="log">Haz clic en cualquier lugar…</div>
-    </section>
-  </main>
-
-  <!-- Moldes: su contenido no se muestra -->
-  <template id="tpl-tarjeta">
-    <article class="tarjeta">
-      <div class="emoji"></div>
-      <h3></h3>
-      <p class="precio"></p>
-      <button type="button" data-accion="agregar">Agregar</button>
-      <button type="button" class="fav" data-accion="favorito" aria-pressed="false">♡</button>
-    </article>
-  </template>
-
-  <template id="tpl-item-carrito">
-    <li>
-      <span class="nombre"></span>
-      <button type="button" class="mini" data-accion="menos">−</button>
-      <span class="cantidad"></span>
-      <button type="button" class="mini" data-accion="mas">+</button>
-      <span class="subtotal"></span>
-      <button type="button" class="mini" data-accion="quitar">✕</button>
-    </li>
-  </template>
-</body>
-
+    <template id="tpl-item-carrito">
+      <li>
+        <span class="nombre"></span>
+        <button type="button" class="mini" data-accion="menos" aria-label="Disminuir cantidad">−</button>
+        <span class="cantidad"></span>
+        <button type="button" class="mini" data-accion="mas" aria-label="Aumentar cantidad">+</button>
+        <span class="subtotal"></span>
+        <button type="button" class="mini" data-accion="quitar" aria-label="Quitar producto">✕</button>
+      </li>
+    </template>
+  </body>
 </html>

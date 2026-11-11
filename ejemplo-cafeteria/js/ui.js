@@ -6,20 +6,27 @@ const vacioEl = document.querySelector("#vacio");
 const log = document.querySelector("#log");
 const tplTarjeta = document.querySelector("#tpl-tarjeta");
 const tplItem = document.querySelector("#tpl-item-carrito");
+const estadoCatalogo = document.querySelector("#estado-catalogo");
 
-// ---------- Renderizado con <template> ----------
-function crearTarjeta(p) {
-  const clon = tplTarjeta.content.cloneNode(true);       // copia profunda del molde
+function crearTarjeta(producto) {
+  const clon = tplTarjeta.content.cloneNode(true);
   const tarjeta = clon.querySelector(".tarjeta");
-  tarjeta.dataset.id = p.id;
-  tarjeta.classList.toggle("favorita", p.favorito);
-  clon.querySelector(".emoji").textContent = p.emoji;    // textContent: seguro
-  clon.querySelector("h3").textContent = p.nombre;
-  clon.querySelector(".precio").textContent = `$${p.precio.toFixed(2)}`;
-  const fav = clon.querySelector(".fav");
-  fav.classList.toggle("activo", p.favorito);
-  fav.setAttribute("aria-pressed", p.favorito);
-  fav.textContent = p.favorito ? "♥" : "♡";
+  tarjeta.dataset.id = producto.id;
+  tarjeta.classList.toggle("favorita", producto.favorito);
+  clon.querySelector(".emoji").textContent = producto.emoji;
+  clon.querySelector("h3").textContent = producto.nombre;
+  clon.querySelector(".precio").textContent = `$${producto.precio.toFixed(2)}`;
+
+  const botonFavorito = clon.querySelector(".fav");
+  botonFavorito.classList.toggle("activo", producto.favorito);
+  botonFavorito.setAttribute("aria-pressed", String(producto.favorito));
+  botonFavorito.setAttribute(
+    "aria-label",
+    producto.favorito
+      ? `Quitar ${producto.nombre} de favoritos`
+      : `Agregar ${producto.nombre} a favoritos`,
+  );
+  botonFavorito.textContent = producto.favorito ? "♥" : "♡";
   return clon;
 }
 
@@ -27,16 +34,42 @@ export function renderCatalogo(productos) {
   catalogo.replaceChildren(...productos.map(crearTarjeta));
 }
 
+export function mostrarEstadoCatalogo(cantidad, termino, mensaje = "", esError = false) {
+  if (mensaje) {
+    estadoCatalogo.textContent = mensaje;
+    estadoCatalogo.classList.toggle("error", esError);
+    return;
+  }
+
+  estadoCatalogo.classList.remove("error");
+  if (cantidad === 0) {
+    estadoCatalogo.textContent = termino.trim()
+      ? `No se encontraron productos para "${termino}".`
+      : "No hay productos disponibles.";
+  } else {
+    estadoCatalogo.textContent = `${cantidad} producto(s) encontrado(s).`;
+  }
+}
+
 export function renderCarrito(carrito, productos, total) {
-  const items = carrito.map((item) => {
-    const p = productos.find((prod) => prod.id === item.id);
-    const clon = tplItem.content.cloneNode(true);
-    clon.querySelector("li").dataset.id = item.id;
-    clon.querySelector(".nombre").textContent = p.nombre;
-    clon.querySelector(".cantidad").textContent = item.cantidad;
-    clon.querySelector(".subtotal").textContent = `$${(p.precio * item.cantidad).toFixed(2)}`;
-    return clon;
-  });
+  const items = carrito
+    .map((item) => {
+      const producto = productos.find((actual) => actual.id === item.id);
+      if (!producto) return null;
+
+      const clon = tplItem.content.cloneNode(true);
+      const fila = clon.querySelector("li");
+      fila.dataset.id = item.id;
+      clon.querySelector(".nombre").textContent = producto.nombre;
+      clon.querySelector(".cantidad").textContent = item.cantidad;
+      clon.querySelector(".subtotal").textContent = `$${(producto.precio * item.cantidad).toFixed(2)}`;
+      clon.querySelector('[data-accion="menos"]').setAttribute("aria-label", `Disminuir cantidad de ${producto.nombre}`);
+      clon.querySelector('[data-accion="mas"]').setAttribute("aria-label", `Aumentar cantidad de ${producto.nombre}`);
+      clon.querySelector('[data-accion="quitar"]').setAttribute("aria-label", `Quitar ${producto.nombre} del carrito`);
+      return clon;
+    })
+    .filter(Boolean);
+
   listaCarrito.replaceChildren(...items);
   totalEl.textContent = total.toFixed(2);
   vacioEl.classList.toggle("oculto", carrito.length > 0);
@@ -50,11 +83,10 @@ export function mostrarError(form, nombre, mensaje) {
 }
 
 export function mostrarErrores(form, errores) {
-  Object.entries(errores).forEach(([nombre, msg]) => mostrarError(form, nombre, msg));
+  Object.entries(errores).forEach(([nombre, mensaje]) => mostrarError(form, nombre, mensaje));
   form.elements[Object.keys(errores)[0]]?.focus();
 }
 
-// Errores de la Constraint Validation API
 export function mostrarErroresNativos(form) {
   const invalidos = [...form.elements].filter((campo) => !campo.checkValidity());
   invalidos.forEach((campo) => mostrarError(form, campo.name, campo.validationMessage));
@@ -62,8 +94,8 @@ export function mostrarErroresNativos(form) {
 }
 
 export function limpiarErrores(form) {
-  form.querySelectorAll("[data-error-para]").forEach((s) => (s.textContent = ""));
-  form.querySelectorAll(".invalido").forEach((c) => c.classList.remove("invalido"));
+  form.querySelectorAll("[data-error-para]").forEach((elemento) => (elemento.textContent = ""));
+  form.querySelectorAll(".invalido").forEach((campo) => campo.classList.remove("invalido"));
   mostrarMensaje(form, "");
 }
 
@@ -73,14 +105,14 @@ export function limpiarError(campo) {
 }
 
 export function mostrarMensaje(form, texto, esError = false) {
-  const p = form.querySelector(".mensaje");
-  p.textContent = texto;
-  p.classList.toggle("error", esError);
+  const mensaje = form.querySelector(".mensaje");
+  mensaje.textContent = texto;
+  mensaje.classList.toggle("error", esError);
 }
 
-export function mostrarLog(e) {
-  const accion = e.target.closest("[data-accion]")?.dataset.accion ?? "ninguna";
+export function mostrarLog(evento) {
+  const accion = evento.target.closest("[data-accion]")?.dataset.accion ?? "ninguna";
   log.textContent =
-    `target: <${e.target.tagName.toLowerCase()}> · ` +
-    `currentTarget: ${e.currentTarget === document ? "document" : "?"} · acción: ${accion}`;
+    `target: <${evento.target.tagName.toLowerCase()}> · ` +
+    `currentTarget: ${evento.currentTarget === document ? "document" : "?"} · acción: ${accion}`;
 }

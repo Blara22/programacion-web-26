@@ -1,4 +1,10 @@
-const productos = [
+const parrafo = document.querySelector('#texto');
+console.log(texto);
+texto.textContent = "Mi párrafo";
+texto.append("Hola :)");
+texto.style.color = "gold";
+texto.classList.add("clase");
+/*const productos = [
   { id: 1, nombre: "Teclado", precio: 450, stock: 5 },
   { id: 2, nombre: "Mouse", precio: 200, stock: 0 },
   { id: 3, nombre: "Monitor", precio: 3200, stock: 2 },
